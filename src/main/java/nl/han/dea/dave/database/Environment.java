@@ -9,7 +9,7 @@ public class Environment {
     private ResourceBundle input = null;
 
     public String getEnvVariable(EnvironmentType type) {
-        input = ResourceBundle.getBundle("config");
+        input = ResourceBundle.getBundle("environment");
         switch (type) {
             case USERNAME:
                 return input.getString("USERNAME");
