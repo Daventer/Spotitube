@@ -1,4 +1,4 @@
-package nl.han.dea.dave.daos;
+package nl.han.dea.dave.datasource.daos;
 
 import nl.han.dea.dave.controllers.dto.TrackDTO;
 import nl.han.dea.dave.controllers.dto.TracksDTO;

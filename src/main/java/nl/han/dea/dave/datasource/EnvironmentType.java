@@ -1,4 +1,4 @@
-package nl.han.dea.dave.enums;
+package nl.han.dea.dave.datasource;
 
 public enum EnvironmentType {
     USERNAME,

@@ -1,4 +1,4 @@
-package nl.han.dea.dave.daos;
+package nl.han.dea.dave.datasource.daos;
 
 import nl.han.dea.dave.controllers.dto.PlaylistDTO;
 import nl.han.dea.dave.controllers.dto.PlaylistRequestDTO;
@@ -130,5 +130,59 @@ public class PlaylistDao extends Dao {
         }finally {
             closeConnection(null, preparedStatement);
         }
+    }
+
+    public ArrayList getPlaylistIdsFromUser(String userName) {
+        // query for playlist id
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        String query = "SELECT * FROM linkplaylistswithuser where user = ?";
+        ArrayList allIds = new ArrayList();
+
+        try {
+            getRepository().newConnection();
+            preparedStatement = getRepository().preparedStatement(query);
+            preparedStatement.setString(1, userName);
+            resultSet = getRepository().executeQuery(preparedStatement);
+
+            while (resultSet.next()) {
+                allIds.add(resultSet.getInt("playlist"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection(resultSet, preparedStatement);
+        }
+
+        return allIds;
+    }
+
+    public PlaylistsDTO getAllPlaylistsFromUser(int userId) {
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        String query = "select * from playlists where user=?";
+        ArrayList<PlaylistDTO> playlistDTOS = new ArrayList<>();
+        PlaylistsDTO playlistsDTO = null;
+
+        try {
+            getRepository().newConnection();
+            preparedStatement = getRepository().preparedStatement(query);
+            preparedStatement.setInt(1, userId);
+            resultSet = getRepository().executeQuery(preparedStatement);
+
+            while (resultSet.next()) {
+                PlaylistDTO playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getBoolean("owner"), null);
+                playlistDTOS.add(playlistDTO);
+            }
+
+            playlistsDTO = new PlaylistsDTO(playlistDTOS);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            closeConnection(resultSet, preparedStatement);
+        }
+
+        return playlistsDTO;
     }
 }

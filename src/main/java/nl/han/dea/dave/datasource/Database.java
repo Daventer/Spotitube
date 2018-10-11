@@ -1,6 +1,4 @@
-package nl.han.dea.dave.database;
-
-import nl.han.dea.dave.enums.EnvironmentType;
+package nl.han.dea.dave.datasource;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -20,7 +18,6 @@ public class Database {
         connection = null;
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance());
-            // load and register JDBC driver for MySQL
             connection = DriverManager.getConnection(dbUrl, userName, password);
             return connection;
         } catch (SQLException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {

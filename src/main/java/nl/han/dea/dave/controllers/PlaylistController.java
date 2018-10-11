@@ -1,6 +1,5 @@
 package nl.han.dea.dave.controllers;
 
-import nl.han.dea.dave.controllers.dto.PlaylistDTO;
 import nl.han.dea.dave.controllers.dto.PlaylistRequestDTO;
 import nl.han.dea.dave.controllers.dto.TrackDTO;
 import nl.han.dea.dave.services.PlaylistService;
@@ -21,8 +20,11 @@ public class PlaylistController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response all() {
-        return Response.ok(playlistService.allPlaylists()).build();
+    public Response all(@QueryParam("token") String token) {
+        if (userService.tokenIsValid(token)) {
+            return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
+        }
+        return Response.ok(401).build();
     }
 
     @PUT
@@ -32,7 +34,7 @@ public class PlaylistController {
     public Response editPlaylist(@PathParam("id") int playlistId, @QueryParam("token") String token, PlaylistRequestDTO playlistDTO){
         if (playlistService.playlistExist(playlistId) && userService.tokenIsValid(token)){
             playlistService.updatePlaylistName(playlistId, playlistDTO.getName());
-            return Response.ok(playlistService.allPlaylists()).build();
+            return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
         return Response.ok(401).build();
     }
@@ -44,7 +46,7 @@ public class PlaylistController {
         if (userService.tokenIsValid(token)){
             playlistDTO.setOwner(true);
             playlistService.addPlaylist(playlistDTO);
-            return Response.ok(playlistService.allPlaylists()).build();
+            return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
         return Response.ok(401).build();
     }
@@ -56,7 +58,7 @@ public class PlaylistController {
     public Response deletePlaylist(@PathParam("id") int playlistId, @QueryParam("token") String token){
         if (userService.tokenIsValid(token)){
             playlistService.deletePlaylist(playlistId);
-            return Response.ok(playlistService.allPlaylists()).build();
+            return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
         return Response.ok(401).build();
     }

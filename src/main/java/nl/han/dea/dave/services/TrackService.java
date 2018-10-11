@@ -2,7 +2,7 @@ package nl.han.dea.dave.services;
 
 import nl.han.dea.dave.controllers.dto.TrackDTO;
 import nl.han.dea.dave.controllers.dto.TracksDTO;
-import nl.han.dea.dave.daos.TrackDao;
+import nl.han.dea.dave.datasource.daos.TrackDao;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

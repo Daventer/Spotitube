@@ -1,12 +1,10 @@
-package nl.han.dea.dave.database;
-
-import nl.han.dea.dave.enums.EnvironmentType;
+package nl.han.dea.dave.datasource;
 
 import java.util.ResourceBundle;
 
 public class Environment {
 
-    private ResourceBundle input = null;
+    private ResourceBundle input;
 
     public String getEnvVariable(EnvironmentType type) {
         input = ResourceBundle.getBundle("environment");

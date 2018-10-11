@@ -1,6 +1,6 @@
 package nl.han.dea.dave.services;
 
-import nl.han.dea.dave.daos.UserDao;
+import nl.han.dea.dave.datasource.daos.UserDao;
 
 import javax.inject.Inject;
 
@@ -15,7 +15,15 @@ public class UserService {
     }
 
     public boolean tokenIsValid(String token){
-        return token.equals(TOKEN);
+        return getUserIdFromToken(token) != 0;
+    }
+
+    public int getUserIdFromToken(String token){
+        return userDao.getUserIdFromToken(token);
+    }
+
+    public void setNewToken(String userName, String token) {
+        userDao.setNewToken(userName, token);
     }
 
     public boolean userExist(String userName){

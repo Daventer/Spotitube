@@ -1,4 +1,4 @@
-package nl.han.dea.dave.database;
+package nl.han.dea.dave.datasource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
