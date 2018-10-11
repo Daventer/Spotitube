@@ -15,6 +15,8 @@ public class Environment {
                 return input.getString("PASSWORD");
             case DBURL:
                 return input.getString("DBURL");
+            case MYSQLDRIVER:
+                return input.getString("MYSQLDRIVER");
             default:
                 return null;
         }
