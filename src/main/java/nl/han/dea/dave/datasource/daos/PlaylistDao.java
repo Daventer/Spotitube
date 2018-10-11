@@ -11,33 +11,6 @@ import java.util.ArrayList;
 
 public class PlaylistDao extends Dao {
 
-    public PlaylistsDTO getAllPlaylists() {
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
-        String query = "select * from playlists";
-        ArrayList<PlaylistDTO> playlistDTOS = new ArrayList<>();
-
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            resultSet = getRepository().executeQuery(preparedStatement);
-
-            while (resultSet.next()) {
-                PlaylistDTO playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getBoolean("owner"), null);
-                playlistDTOS.add(playlistDTO);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            closeConnection(resultSet, preparedStatement);
-        }
-
-        PlaylistsDTO playlistsDTO = new PlaylistsDTO(playlistDTOS);
-
-        return playlistsDTO;
-    }
-
     public PlaylistDTO getPlaylist(int playlistId) {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
@@ -132,46 +105,25 @@ public class PlaylistDao extends Dao {
         }
     }
 
-    public ArrayList getPlaylistIdsFromUser(String userName) {
-        // query for playlist id
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
-        String query = "SELECT * FROM linkplaylistswithuser where user = ?";
-        ArrayList allIds = new ArrayList();
-
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            preparedStatement.setString(1, userName);
-            resultSet = getRepository().executeQuery(preparedStatement);
-
-            while (resultSet.next()) {
-                allIds.add(resultSet.getInt("playlist"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            closeConnection(resultSet, preparedStatement);
-        }
-
-        return allIds;
-    }
-
     public PlaylistsDTO getAllPlaylistsFromUser(int userId) {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-        String query = "select * from playlists where user=?";
+//        String query = "select * from playlists where id=?";
+        String query = "select * from playlists";
         ArrayList<PlaylistDTO> playlistDTOS = new ArrayList<>();
         PlaylistsDTO playlistsDTO = null;
 
         try {
             getRepository().newConnection();
             preparedStatement = getRepository().preparedStatement(query);
-            preparedStatement.setInt(1, userId);
+//            preparedStatement.setInt(1, userId);
             resultSet = getRepository().executeQuery(preparedStatement);
 
             while (resultSet.next()) {
-                PlaylistDTO playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getBoolean("owner"), null);
+                PlaylistDTO playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), false, null);
+                if (userId == resultSet.getInt("user")){
+                    playlistDTO.setOwner(true);
+                }
                 playlistDTOS.add(playlistDTO);
             }
 

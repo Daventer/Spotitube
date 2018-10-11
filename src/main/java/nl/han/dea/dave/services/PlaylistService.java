@@ -44,16 +44,6 @@ public class PlaylistService {
         return new TracksDTO(playlistDTO.getTracks());
     }
 
-//    public TracksDTO getTracksFromPlaylistId(int id) {
-//        PlaylistDTO playlistDTO = playlistById(id);
-//
-//        TracksDTO tracks = trackService.tracksFromPlaylistId(id);
-//
-//        playlistDTO.setTracks(tracks.getTracks());
-//
-//        return new TracksDTO(playlistDTO.getTracks());
-//    }
-
     public Boolean playlistExist(int playlistId) {
         return playlistDao.getPlaylist(playlistId) != null;
     }
