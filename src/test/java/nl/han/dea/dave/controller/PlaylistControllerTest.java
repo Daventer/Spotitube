@@ -54,6 +54,7 @@ public class PlaylistControllerTest {
         Response test = playlistController.all(userResponseDTO.getToken());
 
         Assertions.assertEquals(200, test.getStatus());
+        Assertions.assertEquals(200, test.getStatus());
     }
 
 
