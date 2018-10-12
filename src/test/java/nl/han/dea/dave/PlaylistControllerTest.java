@@ -176,29 +176,29 @@ public class PlaylistControllerTest {
         Assertions.assertEquals(401, test.getStatus());
     }
 
-//    @Test
-//    public void checkIfTrackDoesntExistsInAddTracksToPlaylist(){
-//        //TrackDTO
-//        TrackDTO trackDTO = new TrackDTO();
-//        trackDTO.setId(2);
-//        trackDTO.setOfflineAvailable(true);
-//
-//        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
-//
-//        Assertions.assertEquals(200, test.getStatus());
-//    }
+    @Test
+    public void checkIfTrackDoesntExistsInAddTracksToPlaylist(){
+        //TrackDTO
+        TrackDTO trackDTO = new TrackDTO();
+        trackDTO.setId(2);
+        trackDTO.setOfflineAvailable(true);
 
-//    @Test
-//    public void checkIfTrackHasTheSameOfflineAvailableStatusInAddTracksToPlaylist(){
-//        //TrackDTO
-//        TrackDTO trackDTO = new TrackDTO();
-//        trackDTO.setId(TRACKID);
-//        trackDTO.setOfflineAvailable(false);
-//
-//        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
-//
-//        Assertions.assertEquals(200, test.getStatus());
-//    }
+        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+    @Test
+    public void checkIfTrackHasTheSameOfflineAvailableStatusInAddTracksToPlaylist(){
+        //TrackDTO
+        TrackDTO trackDTO = new TrackDTO();
+        trackDTO.setId(TRACKID);
+        trackDTO.setOfflineAvailable(false);
+
+        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
+
+        Assertions.assertEquals(200, test.getStatus());
+    }
 
     @Test
     public void checkDeleteTrackFromPlaylistReturns200(){

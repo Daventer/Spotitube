@@ -80,10 +80,10 @@ public class PlaylistController {
     public Response addTrackToPlaylist(@PathParam("id") int playlistId, @QueryParam("token") String token, TrackDTO trackDTO) {
         int trackId = trackDTO.getId();
         Boolean offlineAvailable = trackDTO.getOfflineAvailable();
-        // check token else return 401 error
-        if (userService.tokenIsValid(token)) {
-            // check if track exists and if track doesn't already exists inside the playlist
-            if (trackService.trackExists(trackId) && !trackService.offlineAvailableIsTheSame(trackId, offlineAvailable)) {
+        // check token and if track exists else return 401 error
+        if (trackService.trackExists(trackId) && userService.tokenIsValid(token)) {
+            // check if track doesn't already exists inside the playlist
+            if (!trackService.offlineAvailableIsTheSame(trackId, offlineAvailable)) {
                 trackService.updateOfflineAvailable(trackId, offlineAvailable);
             }
             if (!trackService.trackExistsInPlaylist(playlistId, trackId)){
