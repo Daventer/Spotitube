@@ -20,16 +20,16 @@ public class UserService {
         return userDao.getUserIdFromToken(token);
     }
 
-    public void setNewToken(String userName, String token) {
-        userDao.setNewToken(userName, token);
-    }
-
     public boolean userExist(String userName){
         return userDao.getUser(userName) != null;
     }
 
     public String getPasswordFromUser(String username){
         return userDao.getUser(username).getPassword();
+    }
+
+    public void setNewToken(String userName, String token) {
+        userDao.setNewToken(userName, token);
     }
 
     @Inject
