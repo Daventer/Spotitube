@@ -99,10 +99,10 @@ public class PlaylistController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{playlistId}/tracks/{trackId}")
     public Response deleteTrackFromPlaylist(@PathParam("playlistId") int playlistId,@PathParam("trackId") int trackId,@QueryParam("token") String token) {
-        // check token else return 401 error
-        if (userService.tokenIsValid(token)) {
-            // check if track exists and if track exists inside the playlist
-            if (trackService.trackExists(trackId) && trackService.trackExistsInPlaylist(playlistId, trackId)) {
+        // check if track exists and check token else return 401 error
+        if (trackService.trackExists(trackId) && userService.tokenIsValid(token)) {
+            // check if track exists inside the playlist
+            if (trackService.trackExistsInPlaylist(playlistId, trackId)) {
                 trackService.deleteTrackFromPlaylist(playlistId, trackId);
             }
             return Response.ok(playlistService.tracksByPlaylistId(playlistId)).build();

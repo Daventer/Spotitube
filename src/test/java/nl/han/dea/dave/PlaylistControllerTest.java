@@ -213,4 +213,11 @@ public class PlaylistControllerTest {
 
         Assertions.assertEquals(401, test.getStatus());
     }
+
+    @Test
+    public void checkIfTrackExistsInDeleteTrackFromPlaylist(){
+        Response test = playlistController.deleteTrackFromPlaylist(PLAYLISTID, 2, "");
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
 }
