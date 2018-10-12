@@ -24,7 +24,7 @@ public class PlaylistController {
         if (userService.tokenIsValid(token)) {
             return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
-        return Response.ok(401).build();
+        return Response.status(401).build();
     }
 
     @PUT
@@ -36,7 +36,7 @@ public class PlaylistController {
             playlistService.updatePlaylistName(playlistId, playlistDTO.getName());
             return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
-        return Response.ok(401).build();
+        return Response.status(401).build();
     }
 
     @POST
@@ -48,7 +48,7 @@ public class PlaylistController {
             playlistService.addPlaylist(playlistDTO);
             return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
-        return Response.ok(401).build();
+        return Response.status(401).build();
     }
 
     @DELETE
@@ -56,21 +56,21 @@ public class PlaylistController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public Response deletePlaylist(@PathParam("id") int playlistId, @QueryParam("token") String token){
-        if (userService.tokenIsValid(token)){
+        if (playlistService.playlistExist(playlistId) && userService.tokenIsValid(token)){
             playlistService.deletePlaylist(playlistId);
             return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
         }
-        return Response.ok(401).build();
+        return Response.status(401).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}/tracks")
-    public Response setTracks(@PathParam("id") int number, @QueryParam("token") String token) {
-        if (!userService.tokenIsValid(token)) {
-            return Response.ok(401).build();
+    public Response setTracks(@PathParam("id") int playlistId, @QueryParam("token") String token) {
+        if (playlistService.playlistExist(playlistId) && userService.tokenIsValid(token)) {
+            return Response.ok(playlistService.tracksByPlaylistId(playlistId)).build();
         }
-        return Response.ok(playlistService.tracksByPlaylistId(number)).build();
+        return Response.status(401).build();
     }
 
     @POST
@@ -91,7 +91,7 @@ public class PlaylistController {
             }
             return Response.ok(playlistService.tracksByPlaylistId(playlistId)).build();
         } else {
-            return Response.ok(401).build();
+            return Response.status(401).build();
         }
     }
 
@@ -107,7 +107,7 @@ public class PlaylistController {
             }
             return Response.ok(playlistService.tracksByPlaylistId(playlistId)).build();
         } else {
-            return Response.ok(401).build();
+            return Response.status(401).build();
         }
     }
 
