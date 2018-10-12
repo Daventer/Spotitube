@@ -1,4 +1,4 @@
-package nl.han.dea.dave.controller;
+package nl.han.dea.dave;
 
 import nl.han.dea.dave.controllers.TracksController;
 import nl.han.dea.dave.services.TrackService;
