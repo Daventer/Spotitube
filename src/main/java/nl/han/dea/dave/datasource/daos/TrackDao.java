@@ -22,17 +22,16 @@ public class TrackDao extends Dao {
             resultSet = getRepository().executeQuery(preparedStatement);
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String title = resultSet.getString("title");
-                String performer = resultSet.getString("performer");
-                int duration = resultSet.getInt("duration");
-                String album = resultSet.getString("album");
-                int playcount = resultSet.getInt("playcount");
-                String publicationDate = resultSet.getString("publicationdate");
-                String description = resultSet.getString("description");
-                boolean offlineAvaliable = resultSet.getBoolean("offlineavailable");
-
-                TrackDTO trackDTO = new TrackDTO(id, title, performer, duration, album, playcount, publicationDate, description, offlineAvaliable);
+                TrackDTO trackDTO = new TrackDTO();
+                trackDTO.setId(resultSet.getInt("id"));
+                trackDTO.setTitle(resultSet.getString("title"));
+                trackDTO.setPerformer(resultSet.getString("performer"));
+                trackDTO.setDuration(resultSet.getInt("duration"));
+                trackDTO.setAlbum(resultSet.getString("album"));
+                trackDTO.setPlaycount(resultSet.getInt("playcount"));
+                trackDTO.setPublicationDate(resultSet.getString("publicationdate"));
+                trackDTO.setDescription(resultSet.getString("description"));
+                trackDTO.setOfflineAvailable(resultSet.getBoolean("offlineavailable"));
                 trackDTOS.add(trackDTO);
             }
         } catch (SQLException e) {

@@ -24,7 +24,11 @@ public class PlaylistDao extends Dao {
             resultSet = getRepository().executeQuery(preparedStatement);
 
             while (resultSet.next()) {
-                playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getBoolean("owner"), null);
+                playlistDTO =  new PlaylistDTO();
+                playlistDTO.setId(resultSet.getInt("id"));
+                playlistDTO.setName(resultSet.getString("name"));
+                playlistDTO.setOwner(resultSet.getBoolean("owner"));
+                playlistDTO.setTracks(null);
             }
 
         } catch (SQLException e) {
@@ -120,7 +124,11 @@ public class PlaylistDao extends Dao {
             resultSet = getRepository().executeQuery(preparedStatement);
 
             while (resultSet.next()) {
-                PlaylistDTO playlistDTO = new PlaylistDTO(resultSet.getInt("id"), resultSet.getString("name"), false, null);
+                PlaylistDTO playlistDTO = new PlaylistDTO();
+                playlistDTO.setId(resultSet.getInt("id"));
+                playlistDTO.setName(resultSet.getString("name"));
+                playlistDTO.setOwner(false);
+                playlistDTO.setTracks(null);
                 if (userId == resultSet.getInt("user")){
                     playlistDTO.setOwner(true);
                 }

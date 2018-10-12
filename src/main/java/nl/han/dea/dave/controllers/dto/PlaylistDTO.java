@@ -10,13 +10,6 @@ public class PlaylistDTO {
     private boolean owner;
     private ArrayList<TrackDTO> tracks;
 
-    public PlaylistDTO(int id, String name, boolean owner, ArrayList<TrackDTO> tracks) {
-        this.id = id;
-        this.name = name;
-        this.owner = owner;
-        this.tracks = tracks;
-    }
-
     public PlaylistDTO() {
 
     }
