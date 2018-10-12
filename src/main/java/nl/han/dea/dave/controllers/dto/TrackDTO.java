@@ -11,11 +11,6 @@ public class TrackDTO {
     private String description;
     private boolean offlineAvailable;
 
-    // Empty constructor for post
-    public TrackDTO(){
-
-    }
-
     public int getId() {
         return id;
     }

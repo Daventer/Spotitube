@@ -10,10 +10,6 @@ public class PlaylistDTO {
     private boolean owner;
     private ArrayList<TrackDTO> tracks;
 
-    public PlaylistDTO() {
-
-    }
-
     public int getId() {
         return id;
     }
