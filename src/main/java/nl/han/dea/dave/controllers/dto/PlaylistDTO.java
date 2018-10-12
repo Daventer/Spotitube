@@ -17,6 +17,10 @@ public class PlaylistDTO {
         this.tracks = tracks;
     }
 
+    public PlaylistDTO() {
+
+    }
+
     public int getId() {
         return id;
     }

@@ -1,6 +1,5 @@
-package nl.han.dea.dave;
+package nl.han.dea.dave.controller;
 
-import net.moznion.random.string.RandomStringGenerator;
 import nl.han.dea.dave.controllers.LoginController;
 import nl.han.dea.dave.controllers.dto.UserDTO;
 import nl.han.dea.dave.services.UserService;
@@ -29,7 +28,6 @@ public class LoginControllerTest {
 
     @Test
     public void checkAuthentication() {
-
         Mockito.when(userService.authentication("Dave", "1234")).thenReturn(true);
 
         Response test = loginController.login(userDTO);
