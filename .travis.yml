@@ -1,1 +1,8 @@
 language: java
+
+addons:
+  sonarcloud:
+    organization: "Daventer-github"
+
+after_success:
+- mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
