@@ -97,8 +97,15 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfPlaylistDoesntExistsAndTokenIsInvalid(){
-        Response test = playlistController.editPlaylist(2, "", playlistRequestDTO);
+    public void checkIfPlaylistDoesntExistsInEditPlaylist(){
+        Response test = playlistController.editPlaylist(2, TOKEN, playlistRequestDTO);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+    @Test
+    public void checkIfTokenIsInvalidInEditPlaylist(){
+        Response test = playlistController.editPlaylist(PLAYLISTID, "", playlistRequestDTO);
 
         Assertions.assertEquals(401, test.getStatus());
     }
