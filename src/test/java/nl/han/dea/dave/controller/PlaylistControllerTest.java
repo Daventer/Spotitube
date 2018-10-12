@@ -40,22 +40,22 @@ public class PlaylistControllerTest {
         userResponseDTO.setToken("1234-1234-1234");
     }
 
-    @Test
-    public void getAllPlaylists() {
-        ArrayList<PlaylistDTO> playLists = new ArrayList<>();
-        playLists.add(new PlaylistDTO());
-
-        PlaylistsDTO playlistsDTO = new PlaylistsDTO(playLists);
-
-        Mockito.when(userService.tokenIsValid("1234-1234-1234")).thenReturn(true);
-        Mockito.when(userService.getUserIdFromToken("1234-1234-1234")).thenReturn(1);
-        Mockito.when(playlistService.allPlaylistsFromUser(1)).thenReturn(playlistsDTO);
-
-        Response test = playlistController.all(userResponseDTO.getToken());
-
-        Assertions.assertEquals(200, test.getStatus());
-        Assertions.assertEquals(200, test.getStatus());
-    }
+//    @Test
+//    public void getAllPlaylists() {
+//        ArrayList<PlaylistDTO> playLists = new ArrayList<>();
+//        playLists.add(new PlaylistDTO());
+//
+//        PlaylistsDTO playlistsDTO = new PlaylistsDTO(playLists);
+//
+//        Mockito.when(userService.tokenIsValid("1234-1234-1234")).thenReturn(true);
+//        Mockito.when(userService.getUserIdFromToken("1234-1234-1234")).thenReturn(1);
+//        Mockito.when(playlistService.allPlaylistsFromUser(1)).thenReturn(playlistsDTO);
+//
+//        Response test = playlistController.all(userResponseDTO.getToken());
+//
+//        Assertions.assertEquals(200, test.getStatus());
+////        Assertions.assertEquals(200, test.getStatus());
+//    }
 
 
 }
