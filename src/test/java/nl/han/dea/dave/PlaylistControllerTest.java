@@ -62,17 +62,10 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfTokenInvalid(){
+    public void checkIfTokenInvalidInAllPlaylist(){
         Response test = playlistController.all("");
 
         Assertions.assertEquals(401, test.getStatus());
-    }
-
-    @Test
-    public void checkIfTokenIsValid(){
-        Response test = playlistController.all(TOKEN);
-
-        Assertions.assertEquals(200, test.getStatus());
     }
 
     @Test
@@ -87,13 +80,6 @@ public class PlaylistControllerTest {
         Response test = playlistController.editPlaylist(PLAYLISTID, TOKEN, playlistRequestDTO);
 
         Assertions.assertEquals(200, test.getStatus());
-    }
-
-    @Test
-    public void checkIfEditPlaylistReturns401(){
-        Response test = playlistController.editPlaylist(2, TOKEN, playlistRequestDTO);
-
-        Assertions.assertEquals(401, test.getStatus());
     }
 
     @Test
@@ -115,6 +101,13 @@ public class PlaylistControllerTest {
         Response test = playlistController.addPlaylist(TOKEN, playlistRequestDTO);
 
         Assertions.assertEquals(200, test.getStatus());
+    }
+
+    @Test
+    public void checkIfAddPlaylistReturns401(){
+        Response test = playlistController.addPlaylist("", playlistRequestDTO);
+
+        Assertions.assertEquals(401, test.getStatus());
     }
 
     @Test
