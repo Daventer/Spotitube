@@ -62,17 +62,17 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfTokenInvalidInAllPlaylist(){
-        Response test = playlistController.all("");
-
-        Assertions.assertEquals(401, test.getStatus());
-    }
-
-    @Test
     public void checkIfAllPlaylistReturns200() {
         Response test = playlistController.all(TOKEN);
 
         Assertions.assertEquals(200, test.getStatus());
+    }
+
+    @Test
+    public void checkIfTokenInvalidInAllPlaylist(){
+        Response test = playlistController.all("");
+
+        Assertions.assertEquals(401, test.getStatus());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfAddPlaylistReturns401(){
+    public void checkIfTokenIsInvalidInAddPlaylist(){
         Response test = playlistController.addPlaylist("", playlistRequestDTO);
 
         Assertions.assertEquals(401, test.getStatus());
@@ -118,8 +118,15 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfPlaylistDoesntExistsInDeletePlaylistReturns401(){
+    public void checkIfPlaylistDoesntExistsInDeletePlaylist(){
         Response test = playlistController.deletePlaylist(2, TOKEN);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+    @Test
+    public void checkIfTokenIsInvalidInDeletePlaylist(){
+        Response test = playlistController.deletePlaylist(PLAYLISTID, "");
 
         Assertions.assertEquals(401, test.getStatus());
     }
@@ -132,8 +139,15 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfPlaylistDoesntExistsInSetTracksReturns401(){
+    public void checkIfPlaylistDoesntExistsInSetTracks(){
         Response test = playlistController.setTracks(2, TOKEN);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+    @Test
+    public void checkITokenIsInvalidInSetTracks(){
+        Response test = playlistController.setTracks(PLAYLISTID, "");
 
         Assertions.assertEquals(401, test.getStatus());
     }
@@ -151,10 +165,52 @@ public class PlaylistControllerTest {
     }
 
     @Test
+    public void checkIfTokenIsInvalidInAddTracksToPlaylist(){
+        //TrackDTO
+        TrackDTO trackDTO = new TrackDTO();
+        trackDTO.setId(TRACKID);
+        trackDTO.setOfflineAvailable(true);
+
+        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, "", trackDTO);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+//    @Test
+//    public void checkIfTrackDoesntExistsInAddTracksToPlaylist(){
+//        //TrackDTO
+//        TrackDTO trackDTO = new TrackDTO();
+//        trackDTO.setId(2);
+//        trackDTO.setOfflineAvailable(true);
+//
+//        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
+//
+//        Assertions.assertEquals(200, test.getStatus());
+//    }
+
+//    @Test
+//    public void checkIfTrackHasTheSameOfflineAvailableStatusInAddTracksToPlaylist(){
+//        //TrackDTO
+//        TrackDTO trackDTO = new TrackDTO();
+//        trackDTO.setId(TRACKID);
+//        trackDTO.setOfflineAvailable(false);
+//
+//        Response test = playlistController.addTrackToPlaylist(PLAYLISTID, TOKEN, trackDTO);
+//
+//        Assertions.assertEquals(200, test.getStatus());
+//    }
+
+    @Test
     public void checkDeleteTrackFromPlaylistReturns200(){
         Response test = playlistController.deleteTrackFromPlaylist(PLAYLISTID, TRACKID, TOKEN);
 
         Assertions.assertEquals(200, test.getStatus());
     }
 
+    @Test
+    public void checkIfTokenIsInvalidInDeleteTrackFromPlaylist(){
+        Response test = playlistController.deleteTrackFromPlaylist(PLAYLISTID, TRACKID, "");
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
 }
