@@ -90,8 +90,15 @@ public class PlaylistControllerTest {
     }
 
     @Test
-    public void checkIfPlaylistDoesntExistsInEditPlaylistReturns401(){
+    public void checkIfEditPlaylistReturns401(){
         Response test = playlistController.editPlaylist(2, TOKEN, playlistRequestDTO);
+
+        Assertions.assertEquals(401, test.getStatus());
+    }
+
+    @Test
+    public void checkIfPlaylistDoesntExistsAndTokenIsInvalid(){
+        Response test = playlistController.editPlaylist(2, "", playlistRequestDTO);
 
         Assertions.assertEquals(401, test.getStatus());
     }
