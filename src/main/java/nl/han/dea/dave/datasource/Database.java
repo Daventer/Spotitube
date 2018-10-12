@@ -21,7 +21,7 @@ public class Database {
             connection = DriverManager.getConnection(dbUrl, userName, password);
             return connection;
         } catch (SQLException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
         return connection;
     }
