@@ -4,10 +4,8 @@ import java.util.ResourceBundle;
 
 public class Environment {
 
-    private ResourceBundle input;
-
     public String getEnvVariable(EnvironmentType type) {
-        input = ResourceBundle.getBundle("environment");
+        ResourceBundle input = ResourceBundle.getBundle("environment");
         switch (type) {
             case USERNAME:
                 return input.getString("USERNAME");

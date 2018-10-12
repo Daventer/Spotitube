@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public class Database {
 
-    private Connection connection;
     private Environment environment = new Environment();
     private String userName = environment.getEnvVariable(EnvironmentType.USERNAME);
     private String password = environment.getEnvVariable(EnvironmentType.PASSWORD);
@@ -16,7 +15,7 @@ public class Database {
     private String mysqlDriver = environment.getEnvVariable(EnvironmentType.MYSQLDRIVER);
 
     public Connection connect() throws SQLException {
-        connection = null;
+        Connection connection = null;
         try {
             DriverManager.registerDriver((Driver) Class.forName(mysqlDriver).getDeclaredConstructor().newInstance());
             connection = DriverManager.getConnection(dbUrl, userName, password);

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrackDao extends Dao {
 
@@ -14,7 +15,7 @@ public class TrackDao extends Dao {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         String query = "select * from tracks";
-        ArrayList<TrackDTO> trackDTOS = new ArrayList<>();
+        List<TrackDTO> trackDTOS = new ArrayList<>();
 
         try {
             getRepository().newConnection();
@@ -43,12 +44,12 @@ public class TrackDao extends Dao {
         return new TracksDTO(trackDTOS);
     }
 
-    public ArrayList getTracksIdsFromPlaylistid(int id) {
+    public List getTracksIdsFromPlaylistid(int id) {
         // query for playlist id
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         String query = "SELECT * FROM linktracktoplaylist where playlist = ?";
-        ArrayList allIds = new ArrayList();
+        List allIds = new ArrayList();
 
         try {
             getRepository().newConnection();

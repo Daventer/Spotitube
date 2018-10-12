@@ -1,12 +1,12 @@
 package nl.han.dea.dave.datasource.daos;
 
 import nl.han.dea.dave.controllers.dto.UserDTO;
-import nl.han.dea.dave.services.UserService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao extends Dao {
 
@@ -40,11 +40,11 @@ public class UserDao extends Dao {
         return userDTO;
     }
 
-    public ArrayList<UserDTO> getUsers() {
+    public List<UserDTO> getUsers() {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         String query = "select * from users";
-        ArrayList<UserDTO> userDTOS = new ArrayList<>();
+        List<UserDTO> userDTOS = new ArrayList<>();
 
         try {
             getRepository().newConnection();

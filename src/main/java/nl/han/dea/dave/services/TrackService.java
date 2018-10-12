@@ -6,6 +6,7 @@ import nl.han.dea.dave.datasource.daos.TrackDao;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrackService {
 
@@ -20,7 +21,7 @@ public class TrackService {
         // Make new arraylist of TrackDTOS
         ArrayList<TrackDTO> trackDTOS = new ArrayList<>();
         // Connect with DAO
-        ArrayList trackIds = trackDao.getTracksIdsFromPlaylistid(id);
+        List trackIds = trackDao.getTracksIdsFromPlaylistid(id);
 
         // loop through the id's and call getTracksById
         for(int i = 0; i < trackIds.size(); i++){
@@ -71,7 +72,7 @@ public class TrackService {
         trackDao.deleteTrackFromPlaylist(playlistId, trackId);
     }
 
-    public boolean OfflineAvailableTheSame(int trackId, Boolean offlineAvailable) {
+    public boolean offlineAvailableIsTheSame(int trackId, Boolean offlineAvailable) {
         return getTrackById(trackId).getOfflineAvailable() == offlineAvailable;
     }
 

@@ -1,22 +1,15 @@
 package nl.han.dea.dave.controllers.dto;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
+import java.util.List;
 
 public class TracksDTO {
-    private ArrayList<TrackDTO> tracks = new ArrayList<>();
+    private List<TrackDTO> tracks;
 
-    public TracksDTO(ArrayList<TrackDTO> trackDTOS){
+    public TracksDTO(List<TrackDTO> trackDTOS){
         this.tracks = trackDTOS;
     }
-//
-//    public void addTrack(TrackDTO trackDTO){
-//        this.tracks.add(trackDTO);
-//    }
 
-    public ArrayList<TrackDTO> getTracks(){
+    public List<TrackDTO> getTracks(){
         return this.tracks;
     }
 }

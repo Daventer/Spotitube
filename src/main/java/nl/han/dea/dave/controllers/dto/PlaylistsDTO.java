@@ -1,16 +1,16 @@
 package nl.han.dea.dave.controllers.dto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistsDTO {
-    private ArrayList<PlaylistDTO> playlists;
+    private List<PlaylistDTO> playlists;
     private int length;
 
-    public PlaylistsDTO(ArrayList<PlaylistDTO> playlists){
+    public PlaylistsDTO(List<PlaylistDTO> playlists){
         this.playlists =  playlists;
     }
 
-    public ArrayList<PlaylistDTO> getPlaylists() {
+    public List<PlaylistDTO> getPlaylists() {
         return this.playlists;
     }
 

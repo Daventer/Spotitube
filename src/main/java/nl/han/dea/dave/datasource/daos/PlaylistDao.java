@@ -112,7 +112,6 @@ public class PlaylistDao extends Dao {
     public PlaylistsDTO getAllPlaylistsFromUser(int userId) {
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
-//        String query = "select * from playlists where id=?";
         String query = "select * from playlists";
         ArrayList<PlaylistDTO> playlistDTOS = new ArrayList<>();
         PlaylistsDTO playlistsDTO = null;
@@ -120,7 +119,6 @@ public class PlaylistDao extends Dao {
         try {
             getRepository().newConnection();
             preparedStatement = getRepository().preparedStatement(query);
-//            preparedStatement.setInt(1, userId);
             resultSet = getRepository().executeQuery(preparedStatement);
 
             while (resultSet.next()) {

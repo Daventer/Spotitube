@@ -11,9 +11,7 @@ public class TrackDTO {
     private String description;
     private boolean offlineAvailable;
 
-    public int getId() {
-        return id;
-    }
+    public int getId(){return id;}
 
     public void setId(int id) {
         this.id = id;

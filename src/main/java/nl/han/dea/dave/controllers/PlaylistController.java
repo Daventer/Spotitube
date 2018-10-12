@@ -83,7 +83,7 @@ public class PlaylistController {
         // check token else return 401 error
         if (userService.tokenIsValid(token)) {
             // check if track exists and if track doesn't already exists inside the playlist
-            if (trackService.trackExists(trackId) && !trackService.OfflineAvailableTheSame(trackId, offlineAvailable)) {
+            if (trackService.trackExists(trackId) && !trackService.offlineAvailableIsTheSame(trackId, offlineAvailable)) {
                 trackService.updateOfflineAvailable(trackId, offlineAvailable);
             }
             if (!trackService.trackExistsInPlaylist(playlistId, trackId)){
