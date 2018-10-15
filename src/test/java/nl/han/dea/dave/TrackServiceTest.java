@@ -63,8 +63,11 @@ public class TrackServiceTest {
     @Test
     public void checkIfGetTracksFromPlaylistIdReturnSameLengthAsTracksDTO() {
         TracksDTO getTracksFromPlaylistId = trackService.tracksFromPlaylistId(PLAYLISTIDONE);
+        List<TrackDTO> allTracksFromPlaylist = new ArrayList<>();
+        allTracksFromPlaylist.add(trackOne);
+        TracksDTO tracksFromPlaylist = new TracksDTO(allTracksFromPlaylist);
 
-        Assertions.assertEquals(tracksDTO.getTracks().size(), getTracksFromPlaylistId.getTracks().size());
+        Assertions.assertEquals(tracksFromPlaylist.getTracks().size(), getTracksFromPlaylistId.getTracks().size());
     }
 
     @Test
