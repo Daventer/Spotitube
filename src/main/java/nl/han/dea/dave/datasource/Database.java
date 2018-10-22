@@ -1,15 +1,17 @@
 package nl.han.dea.dave.datasource;
 
+import nl.han.dea.dave.logger.ExceptionLogger;
+
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class Database {
 
-    private static final Logger LOGGER =  Logger.getLogger(Database.class.getName());
+    private static ExceptionLogger logger = new ExceptionLogger(Database.class.getName());
+
     private Environment environment = new Environment();
     private String userName = environment.getEnvVariable(EnvironmentType.USERNAME);
     private String password = environment.getEnvVariable(EnvironmentType.PASSWORD);
@@ -23,7 +25,7 @@ public class Database {
             connection = DriverManager.getConnection(dbUrl, userName, password);
             return connection;
         } catch (SQLException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }
         return connection;
     }

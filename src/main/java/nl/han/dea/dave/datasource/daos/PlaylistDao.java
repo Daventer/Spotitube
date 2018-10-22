@@ -3,15 +3,15 @@ package nl.han.dea.dave.datasource.daos;
 import nl.han.dea.dave.controllers.dto.PlaylistDTO;
 import nl.han.dea.dave.controllers.dto.PlaylistRequestDTO;
 import nl.han.dea.dave.controllers.dto.PlaylistsDTO;
+import nl.han.dea.dave.logger.ExceptionLogger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class PlaylistDao extends Dao {
-    private static final Logger LOGGER =  Logger.getLogger(Dao.class.getName());
+    private static ExceptionLogger logger = new ExceptionLogger(Dao.class.getName());
 
     public PlaylistDTO getPlaylist(int playlistId) {
         ResultSet resultSet = null;
@@ -34,7 +34,7 @@ public class PlaylistDao extends Dao {
             }
 
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }
         finally {
             closeConnection(resultSet, preparedStatement);
@@ -56,7 +56,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setInt(2, playlistId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -73,31 +73,27 @@ public class PlaylistDao extends Dao {
             preparedStatement.setBoolean(2, playlistDTO.isOwner());
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }
     }
 
     public void deletePlaylist(int playlistId) {
-        PreparedStatement preparedStatement = null;
         String query = "DELETE FROM playlists WHERE id = ?";
 
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            preparedStatement.setInt(1, playlistId);
-            getRepository().executeUpdate(preparedStatement);
-        } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
-        }finally {
-            closeConnection(null, preparedStatement);
-        }
+        executeUpdateStatementFromPlaylistId(playlistId, query);
+
     }
 
     public void deleteTracksFromPlaylist(int playlistId) {
-        PreparedStatement preparedStatement = null;
         String query = "DELETE FROM linktracktoplaylist WHERE playlist = ?";
+
+        executeUpdateStatementFromPlaylistId(playlistId, query);
+    }
+
+    private void executeUpdateStatementFromPlaylistId(int playlistId, String query){
+        PreparedStatement preparedStatement = null;
 
         try {
             getRepository().newConnection();
@@ -105,7 +101,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setInt(1, playlistId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -137,7 +133,7 @@ public class PlaylistDao extends Dao {
 
             playlistsDTO = new PlaylistsDTO(playlistDTOS);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }
         finally {
             closeConnection(resultSet, preparedStatement);

@@ -2,6 +2,7 @@ package nl.han.dea.dave.datasource.daos;
 
 import nl.han.dea.dave.controllers.dto.TrackDTO;
 import nl.han.dea.dave.controllers.dto.TracksDTO;
+import nl.han.dea.dave.logger.ExceptionLogger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class TrackDao extends Dao {
-    private static final Logger LOGGER =  Logger.getLogger(Dao.class.getName());
+    private static ExceptionLogger logger = new ExceptionLogger(Dao.class.getName());
 
     public TracksDTO getAllTracks() {
         ResultSet resultSet = null;
@@ -38,7 +39,7 @@ public class TrackDao extends Dao {
                 trackDTOS.add(trackDTO);
             }
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -63,7 +64,7 @@ public class TrackDao extends Dao {
                 allIds.add(resultSet.getInt("track"));
             }
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -73,20 +74,8 @@ public class TrackDao extends Dao {
 
 
     public void addTracktoPlaylist(int playlistId, int trackId) {
-        PreparedStatement preparedStatement = null;
         String query = "insert into linktracktoplaylist values (?, ?)";
-
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            preparedStatement.setInt(1, playlistId);
-            preparedStatement.setInt(2, trackId);
-            getRepository().executeUpdate(preparedStatement);
-        } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
-        }finally {
-            closeConnection(null, preparedStatement);
-        }
+        executeStatementFromPlaylistIdAndTrackId(playlistId, trackId, query);
     }
 
     public void updateTrack(TrackDTO trackDTO) {
@@ -109,7 +98,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(9, trackDTO.getId());
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -128,18 +117,23 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }
     }
 
     public void deleteTrackFromPlaylist(int playlistId, int trackId) {
-        PreparedStatement preparedStatement = null;
         String query = "" +
                 "Delete from linktracktoplaylist " +
                 "WHERE playlist=? AND track=?" +
                 "";
+        executeStatementFromPlaylistIdAndTrackId(playlistId, trackId, query);
+    }
+
+    private void executeStatementFromPlaylistIdAndTrackId(int playlistId, int trackId, String query){
+        PreparedStatement preparedStatement = null;
+
         try {
             getRepository().newConnection();
             preparedStatement = getRepository().preparedStatement(query);
@@ -147,7 +141,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }finally {
             closeConnection(null, preparedStatement);
         }

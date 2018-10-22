@@ -1,21 +1,22 @@
 package nl.han.dea.dave.datasource;
 
+import nl.han.dea.dave.logger.ExceptionLogger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class Repository {
 
-    private static final Logger LOGGER =  Logger.getLogger(Repository.class.getName());
+    private static ExceptionLogger logger = new ExceptionLogger(Repository.class.getName());
     private Connection connection;
 
     public void newConnection() {
         try {
             this.connection = new Database().connect();
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }
     }
 
@@ -43,7 +44,7 @@ public class Repository {
                 connection.close();
             }
         } catch (SQLException e) {
-            LOGGER.severe(e.getMessage());
+            logger.serveLogger(e);
         }
     }
 
