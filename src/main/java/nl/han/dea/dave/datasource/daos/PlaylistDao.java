@@ -62,15 +62,16 @@ public class PlaylistDao extends Dao {
         }
     }
 
-    public void addPlaylist(PlaylistRequestDTO playlistDTO) {
+    public void addPlaylist(PlaylistRequestDTO playlistDTO, int userId) {
         PreparedStatement preparedStatement = null;
-        String query = "Insert into playlists (name, owner) values (?, ?)";
+        String query = "Insert into playlists (name, owner, user) values (?, ?, ?)";
 
         try {
             getRepository().newConnection();
             preparedStatement = getRepository().preparedStatement(query);
             preparedStatement.setString(1, playlistDTO.getName());
             preparedStatement.setBoolean(2, playlistDTO.isOwner());
+            preparedStatement.setInt(3, userId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
             logger.serveLogger(e);

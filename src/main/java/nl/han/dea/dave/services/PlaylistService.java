@@ -52,8 +52,8 @@ public class PlaylistService {
         playlistDao.updatePlaylistName(playlistId, name);
     }
 
-    public void addPlaylist(PlaylistRequestDTO playlistDTO) {
-        playlistDao.addPlaylist(playlistDTO);
+    public void addPlaylist(PlaylistRequestDTO playlistDTO, int userId) {
+        playlistDao.addPlaylist(playlistDTO, userId);
     }
 
     public void deletePlaylist(int playlistId) {

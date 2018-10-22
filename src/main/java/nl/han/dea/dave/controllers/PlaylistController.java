@@ -44,9 +44,10 @@ public class PlaylistController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPlaylist(@QueryParam("token") String token, PlaylistRequestDTO playlistDTO){
         if (userService.tokenIsValid(token)){
+            int userId = userService.getUserIdFromToken(token);
             playlistDTO.setOwner(true);
-            playlistService.addPlaylist(playlistDTO);
-            return Response.ok(playlistService.allPlaylistsFromUser(userService.getUserIdFromToken(token))).build();
+            playlistService.addPlaylist(playlistDTO, userId);
+            return Response.ok(playlistService.allPlaylistsFromUser(userId)).build();
         }
         return Response.status(401).build();
     }
