@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UserDao extends Dao {
+    private static final Logger LOGGER = Logger.getLogger(Dao.class.getName());
 
     public UserDTO getUser(String userName) {
 
@@ -30,9 +32,8 @@ public class UserDao extends Dao {
                 userDTO = new UserDTO(user, password);
             }
 
-        } catch (
-                SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.severe(e.getMessage());
         } finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -60,7 +61,7 @@ public class UserDao extends Dao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         } finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -87,7 +88,7 @@ public class UserDao extends Dao {
 
         } catch (
                 SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         } finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -108,8 +109,8 @@ public class UserDao extends Dao {
             preparedStatement.setString(2, userName);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
+            LOGGER.severe(e.getMessage());
+        } finally {
             closeConnection(null, preparedStatement);
         }
     }

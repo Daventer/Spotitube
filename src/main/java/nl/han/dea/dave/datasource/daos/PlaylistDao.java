@@ -8,8 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class PlaylistDao extends Dao {
+    private static final Logger LOGGER =  Logger.getLogger(Dao.class.getName());
 
     public PlaylistDTO getPlaylist(int playlistId) {
         ResultSet resultSet = null;
@@ -32,7 +34,7 @@ public class PlaylistDao extends Dao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
         finally {
             closeConnection(resultSet, preparedStatement);
@@ -54,7 +56,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setInt(2, playlistId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -71,7 +73,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setBoolean(2, playlistDTO.isOwner());
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -87,7 +89,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setInt(1, playlistId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -103,7 +105,7 @@ public class PlaylistDao extends Dao {
             preparedStatement.setInt(1, playlistId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -135,7 +137,7 @@ public class PlaylistDao extends Dao {
 
             playlistsDTO = new PlaylistsDTO(playlistDTOS);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
         finally {
             closeConnection(resultSet, preparedStatement);

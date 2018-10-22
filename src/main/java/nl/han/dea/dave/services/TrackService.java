@@ -56,6 +56,10 @@ public class TrackService {
         return false;
     }
 
+    public boolean offlineAvailableIsTheSame(int trackId, Boolean offlineAvailable) {
+        return getTrackById(trackId).getOfflineAvailable() == offlineAvailable;
+    }
+
     public void addTrackToPlaylist(int playlistId, int trackId){
         trackDao.addTracktoPlaylist(playlistId, trackId);
     }
@@ -70,10 +74,6 @@ public class TrackService {
 
     public void deleteTrackFromPlaylist(int playlistId, int trackId){
         trackDao.deleteTrackFromPlaylist(playlistId, trackId);
-    }
-
-    public boolean offlineAvailableIsTheSame(int trackId, Boolean offlineAvailable) {
-        return getTrackById(trackId).getOfflineAvailable() == offlineAvailable;
     }
 
     @Inject

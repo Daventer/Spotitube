@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TrackDao extends Dao {
+    private static final Logger LOGGER =  Logger.getLogger(Dao.class.getName());
 
     public TracksDTO getAllTracks() {
         ResultSet resultSet = null;
@@ -36,7 +38,7 @@ public class TrackDao extends Dao {
                 trackDTOS.add(trackDTO);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -61,7 +63,7 @@ public class TrackDao extends Dao {
                 allIds.add(resultSet.getInt("track"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(resultSet, preparedStatement);
         }
@@ -81,7 +83,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -107,7 +109,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(9, trackDTO.getId());
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -126,7 +128,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
@@ -145,7 +147,7 @@ public class TrackDao extends Dao {
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }finally {
             closeConnection(null, preparedStatement);
         }
