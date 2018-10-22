@@ -4,16 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class Repository {
 
+    private static final Logger LOGGER =  Logger.getLogger(Repository.class.getName());
     private Connection connection;
 
     public void newConnection() {
         try {
             this.connection = new Database().connect();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 
@@ -41,7 +43,7 @@ public class Repository {
                 connection.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 

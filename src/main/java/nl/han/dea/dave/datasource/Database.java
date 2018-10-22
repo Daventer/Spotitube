@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class Database {
 
+    private static final Logger LOGGER =  Logger.getLogger(Database.class.getName());
     private Environment environment = new Environment();
     private String userName = environment.getEnvVariable(EnvironmentType.USERNAME);
     private String password = environment.getEnvVariable(EnvironmentType.PASSWORD);
@@ -21,7 +23,7 @@ public class Database {
             connection = DriverManager.getConnection(dbUrl, userName, password);
             return connection;
         } catch (SQLException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
         return connection;
     }
