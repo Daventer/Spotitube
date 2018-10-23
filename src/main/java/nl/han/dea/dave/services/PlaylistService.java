@@ -10,7 +10,6 @@ public class PlaylistService {
     private TrackService trackService;
     private PlaylistDao playlistDao;
 
-
     public PlaylistsDTO allPlaylistsFromUser(int userId) {
 
         PlaylistsDTO playlists = playlistDao.getAllPlaylistsFromUser(userId);

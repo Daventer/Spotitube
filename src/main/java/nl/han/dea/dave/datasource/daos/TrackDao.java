@@ -2,6 +2,7 @@ package nl.han.dea.dave.datasource.daos;
 
 import nl.han.dea.dave.controllers.dto.TrackDTO;
 import nl.han.dea.dave.controllers.dto.TracksDTO;
+import nl.han.dea.dave.datasource.identities.TrackIdentityMap;
 import nl.han.dea.dave.logger.ExceptionLogger;
 
 import java.sql.PreparedStatement;
@@ -18,6 +19,10 @@ public class TrackDao extends Dao {
         PreparedStatement preparedStatement = null;
         String query = "select * from tracks";
         List<TrackDTO> trackDTOS = new ArrayList<>();
+
+        if(!hashMapIsSmallerThenTracks()){
+            return TrackIdentityMap.getAllTracks();
+        }
 
         try {
             getRepository().newConnection();
@@ -36,6 +41,7 @@ public class TrackDao extends Dao {
                 trackDTO.setDescription(resultSet.getString("description"));
                 trackDTO.setOfflineAvailable(resultSet.getBoolean("offlineavailable"));
                 trackDTOS.add(trackDTO);
+                addTrackToHashMap(trackDTO);
             }
         } catch (SQLException e) {
             logger.serveLogger(e);
@@ -71,8 +77,7 @@ public class TrackDao extends Dao {
         return allIds;
     }
 
-
-    public void addTracktoPlaylist(int playlistId, int trackId) {
+    public void addTrackToPlaylist(int playlistId, int trackId) {
         String query = "insert into linktracktoplaylist values (?, ?)";
         executeStatementFromPlaylistIdAndTrackId(playlistId, trackId, query);
     }
@@ -115,6 +120,7 @@ public class TrackDao extends Dao {
             preparedStatement.setBoolean(1, offlineAvailable);
             preparedStatement.setInt(2, trackId);
             getRepository().executeUpdate(preparedStatement);
+            TrackIdentityMap.updateOfflineAvailable(trackId, offlineAvailable);
         } catch (SQLException e) {
             logger.serveLogger(e);
         }finally {
@@ -127,6 +133,7 @@ public class TrackDao extends Dao {
                 "Delete from linktracktoplaylist " +
                 "WHERE playlist=? AND track=?" +
                 "";
+        TrackIdentityMap.deleteTrackFromPlaylist(playlistId, trackId);
         executeStatementFromPlaylistIdAndTrackId(playlistId, trackId, query);
     }
 
@@ -144,5 +151,43 @@ public class TrackDao extends Dao {
         }finally {
             closeConnection(null, preparedStatement);
         }
+    }
+
+    public int getTotalLengthOfTracks() {
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        String query = "select count(*) as total from tracks";
+        int total = 0;
+
+        try {
+            getRepository().newConnection();
+            preparedStatement = getRepository().preparedStatement(query);
+            resultSet = getRepository().executeQuery(preparedStatement);
+
+            while (resultSet.next()) {
+                total = resultSet.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            logger.serveLogger(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement);
+        }
+
+        return total;
+    }
+
+    public void addTrackToHashMap(TrackDTO trackDTO) {
+        if (TrackIdentityMap.getTrack(trackDTO.getId()) == null) {
+            TrackIdentityMap.addTrack(trackDTO);
+        }
+    }
+
+    public boolean tracksExistsInHashmap(int id){
+        return TrackIdentityMap.getTrack(id) != null;
+    }
+
+    public boolean hashMapIsSmallerThenTracks() {
+        return TrackIdentityMap.getAllTracks().getTracks().size() < getTotalLengthOfTracks();
     }
 }

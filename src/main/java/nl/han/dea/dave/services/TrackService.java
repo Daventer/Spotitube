@@ -61,7 +61,7 @@ public class TrackService {
     }
 
     public void addTrackToPlaylist(int playlistId, int trackId){
-        trackDao.addTracktoPlaylist(playlistId, trackId);
+        trackDao.addTrackToPlaylist(playlistId, trackId);
     }
 
     public void updateTrack(TrackDTO trackDTO) {
