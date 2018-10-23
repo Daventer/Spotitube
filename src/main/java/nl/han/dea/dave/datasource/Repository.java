@@ -32,6 +32,29 @@ public class Repository {
         return preparedStatement.executeUpdate();
     }
 
+    public int getTotalFromQuery(String query){
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        int total = 0;
+
+        try {
+            newConnection();
+            preparedStatement = preparedStatement(query);
+            resultSet = executeQuery(preparedStatement);
+
+            while (resultSet.next()) {
+                total = resultSet.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            logger.serveLogger(e);
+        } finally {
+            closeConnection(resultSet, preparedStatement);
+        }
+
+        return total;
+    }
+
     public void closeConnection(ResultSet resultSet, PreparedStatement preparedStatement) {
         try {
             if (resultSet != null) {

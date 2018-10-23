@@ -154,27 +154,8 @@ public class TrackDao extends Dao {
     }
 
     public int getTotalLengthOfTracks() {
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
         String query = "select count(*) as total from tracks";
-        int total = 0;
-
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            resultSet = getRepository().executeQuery(preparedStatement);
-
-            while (resultSet.next()) {
-                total = resultSet.getInt("total");
-            }
-
-        } catch (SQLException e) {
-            logger.serveLogger(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement);
-        }
-
-        return total;
+        return getRepository().getTotalFromQuery(query);
     }
 
     public void addTrackToHashMap(TrackDTO trackDTO) {

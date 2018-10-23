@@ -159,27 +159,8 @@ public class PlaylistDao extends Dao {
     }
 
     public int getTotalLengthOfPlaylists() {
-        ResultSet resultSet = null;
-        PreparedStatement preparedStatement = null;
         String query = "select count(*) as total from playlists";
-        int total = 0;
-
-        try {
-            getRepository().newConnection();
-            preparedStatement = getRepository().preparedStatement(query);
-            resultSet = getRepository().executeQuery(preparedStatement);
-
-            while (resultSet.next()) {
-                total = resultSet.getInt("total");
-            }
-
-        } catch (SQLException e) {
-            logger.serveLogger(e);
-        } finally {
-            closeConnection(resultSet, preparedStatement);
-        }
-
-        return total;
+        return getRepository().getTotalFromQuery(query);
     }
 
     public void addPlaylistToHashMap(PlaylistDTO playlistDTO) {
