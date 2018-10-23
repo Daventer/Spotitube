@@ -10,6 +10,10 @@ import java.util.Map;
 
 public class TrackIdentityMap{
 
+    private TrackIdentityMap(){
+        
+    }
+
     private static Map<Integer, TrackDTO> trackMap = new HashMap<>();
 
     public static void addTrack(TrackDTO track){
