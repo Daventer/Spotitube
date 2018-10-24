@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class PlaylistIdentityMap {
 
+    private static Map<Integer, PlaylistDTO> playlistMap = new HashMap<>();
+
     private PlaylistIdentityMap(){
 
     }
-
-    private static Map<Integer, PlaylistDTO> playlistMap = new HashMap<>();
 
     public static void addPlaylist(PlaylistDTO playlist){
         playlistMap.put(playlist.getId(), playlist);
