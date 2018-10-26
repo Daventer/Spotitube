@@ -180,12 +180,16 @@ public class PlaylistDao extends Dao {
     private void hashMapUpdateOwner(int userId) {
         List<PlaylistDTO> playlistDTOS = PlaylistIdentityMap.getAllPlaylists().getPlaylists();
         for(PlaylistDTO playlistDTO : playlistDTOS){
-            if (playlistDTO.getUserId() == userId){
+            if (checkIfPlaylistDTOUserIsTheSame(playlistDTO.getUserId(), userId)){
                 PlaylistIdentityMap.updatePlaylistOwner(playlistDTO.getId(), true);
             }
             else {
                 PlaylistIdentityMap.updatePlaylistOwner(playlistDTO.getId(), false);
             }
         }
+    }
+
+    private boolean checkIfPlaylistDTOUserIsTheSame(int playlistDTOUserId, int userId){
+        return playlistDTOUserId == userId;
     }
 }
