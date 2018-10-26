@@ -21,7 +21,7 @@ public class PlaylistDao extends Dao {
         PlaylistDTO playlistDTO = null;
         String query = "select * from playlists where id=?";
 
-        if (playlistExistsInHashmap(playlistId)){
+        if (playlistExistsInHashmap(playlistId)) {
             return PlaylistIdentityMap.getPlaylist(playlistId);
         }
 
@@ -169,7 +169,7 @@ public class PlaylistDao extends Dao {
         }
     }
 
-    public boolean playlistExistsInHashmap(int id){
+    public boolean playlistExistsInHashmap(int id) {
         return PlaylistIdentityMap.getPlaylist(id) != null;
     }
 
@@ -179,17 +179,12 @@ public class PlaylistDao extends Dao {
 
     private void hashMapUpdateOwner(int userId) {
         List<PlaylistDTO> playlistDTOS = PlaylistIdentityMap.getAllPlaylists().getPlaylists();
-        for(PlaylistDTO playlistDTO : playlistDTOS){
-            if (checkIfPlaylistDTOUserIsTheSame(playlistDTO.getUserId(), userId)){
-                PlaylistIdentityMap.updatePlaylistOwner(playlistDTO.getId(), true);
-            }
-            else {
-                PlaylistIdentityMap.updatePlaylistOwner(playlistDTO.getId(), false);
-            }
+        for (PlaylistDTO playlistDTO : playlistDTOS) {
+            PlaylistIdentityMap.updatePlaylistOwner(playlistDTO.getId(), playlistDTOUserIdIsTheSameAsUserId(playlistDTO.getUserId(), userId));
         }
     }
 
-    private boolean checkIfPlaylistDTOUserIsTheSame(int playlistDTOUserId, int userId){
+    private boolean playlistDTOUserIdIsTheSameAsUserId(int playlistDTOUserId, int userId) {
         return playlistDTOUserId == userId;
     }
 }
