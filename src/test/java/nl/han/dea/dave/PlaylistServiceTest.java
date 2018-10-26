@@ -1,9 +1,9 @@
 package nl.han.dea.dave;
 
-import nl.han.dea.dave.controllers.dto.PlaylistDTO;
-import nl.han.dea.dave.controllers.dto.PlaylistsDTO;
-import nl.han.dea.dave.controllers.dto.TrackDTO;
-import nl.han.dea.dave.controllers.dto.TracksDTO;
+import nl.han.dea.dave.dto.PlaylistDTO;
+import nl.han.dea.dave.dto.PlaylistsDTO;
+import nl.han.dea.dave.dto.TrackDTO;
+import nl.han.dea.dave.dto.TracksDTO;
 import nl.han.dea.dave.datasource.daos.PlaylistDao;
 import nl.han.dea.dave.services.PlaylistService;
 import nl.han.dea.dave.services.TrackService;

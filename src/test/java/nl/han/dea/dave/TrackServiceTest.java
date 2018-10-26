@@ -1,7 +1,7 @@
 package nl.han.dea.dave;
 
-import nl.han.dea.dave.controllers.dto.TrackDTO;
-import nl.han.dea.dave.controllers.dto.TracksDTO;
+import nl.han.dea.dave.dto.TrackDTO;
+import nl.han.dea.dave.dto.TracksDTO;
 import nl.han.dea.dave.datasource.daos.TrackDao;
 import nl.han.dea.dave.services.TrackService;
 import org.junit.jupiter.api.Assertions;

@@ -1,7 +1,7 @@
 package nl.han.dea.dave.datasource.identities;
 
-import nl.han.dea.dave.controllers.dto.PlaylistDTO;
-import nl.han.dea.dave.controllers.dto.PlaylistsDTO;
+import nl.han.dea.dave.dto.PlaylistDTO;
+import nl.han.dea.dave.dto.PlaylistsDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

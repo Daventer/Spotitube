@@ -1,4 +1,4 @@
-package nl.han.dea.dave.controllers.dto;
+package nl.han.dea.dave.dto;
 
 public class UserResponseDTO {
     private String token;

@@ -1,6 +1,6 @@
 package nl.han.dea.dave;
 
-import nl.han.dea.dave.controllers.dto.UserDTO;
+import nl.han.dea.dave.dto.UserDTO;
 import nl.han.dea.dave.datasource.daos.UserDao;
 import nl.han.dea.dave.services.UserService;
 import org.junit.jupiter.api.Assertions;

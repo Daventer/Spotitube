@@ -1,8 +1,8 @@
 package nl.han.dea.dave.datasource.daos;
 
-import nl.han.dea.dave.controllers.dto.PlaylistDTO;
-import nl.han.dea.dave.controllers.dto.PlaylistRequestDTO;
-import nl.han.dea.dave.controllers.dto.PlaylistsDTO;
+import nl.han.dea.dave.dto.PlaylistDTO;
+import nl.han.dea.dave.dto.PlaylistRequestDTO;
+import nl.han.dea.dave.dto.PlaylistsDTO;
 import nl.han.dea.dave.datasource.identities.PlaylistIdentityMap;
 import nl.han.dea.dave.logger.ExceptionLogger;
 

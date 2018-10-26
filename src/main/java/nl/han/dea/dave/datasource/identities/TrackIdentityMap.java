@@ -1,7 +1,7 @@
 package nl.han.dea.dave.datasource.identities;
 
-import nl.han.dea.dave.controllers.dto.TrackDTO;
-import nl.han.dea.dave.controllers.dto.TracksDTO;
+import nl.han.dea.dave.dto.TrackDTO;
+import nl.han.dea.dave.dto.TracksDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;

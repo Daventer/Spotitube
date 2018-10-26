@@ -1,6 +1,6 @@
 package nl.han.dea.dave.datasource.daos;
 
-import nl.han.dea.dave.controllers.dto.UserDTO;
+import nl.han.dea.dave.dto.UserDTO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

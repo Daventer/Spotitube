@@ -1,6 +1,6 @@
 package nl.han.dea.dave.services;
 
-import nl.han.dea.dave.controllers.dto.*;
+import nl.han.dea.dave.dto.*;
 import nl.han.dea.dave.datasource.daos.PlaylistDao;
 
 import javax.inject.Inject;

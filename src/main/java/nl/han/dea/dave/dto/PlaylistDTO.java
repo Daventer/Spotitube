@@ -1,4 +1,4 @@
-package nl.han.dea.dave.controllers.dto;
+package nl.han.dea.dave.dto;
 
 import java.util.List;
 

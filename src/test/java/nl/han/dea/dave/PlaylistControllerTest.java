@@ -1,7 +1,7 @@
 package nl.han.dea.dave;
 
 import nl.han.dea.dave.controllers.PlaylistController;
-import nl.han.dea.dave.controllers.dto.*;
+import nl.han.dea.dave.dto.*;
 import nl.han.dea.dave.services.PlaylistService;
 import nl.han.dea.dave.services.TrackService;
 import nl.han.dea.dave.services.UserService;

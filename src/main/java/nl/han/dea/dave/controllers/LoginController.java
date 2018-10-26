@@ -1,8 +1,8 @@
 package nl.han.dea.dave.controllers;
 
 import net.moznion.random.string.RandomStringGenerator;
-import nl.han.dea.dave.controllers.dto.UserDTO;
-import nl.han.dea.dave.controllers.dto.UserResponseDTO;
+import nl.han.dea.dave.dto.UserDTO;
+import nl.han.dea.dave.dto.UserResponseDTO;
 import nl.han.dea.dave.services.UserService;
 
 import javax.inject.Inject;
